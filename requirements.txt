@@ -11,3 +11,4 @@ flask
 pymongo[srv]
 gunicorn
 xgboost
+-e .
