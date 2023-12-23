@@ -1,0 +1,42 @@
+name: Sync to Hugging Face hub and Github
+on:
+  push:
+    branches: [main]
+
+  # to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  clear-cache:
+      runs-on: ubuntu-latest
+  
+      steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+  
+      - name: Delete Cached Files
+        run: |
+          # Add commands here to delete specific files or directories from the cache
+          rm -rf ~/.npm
+          rm -rf ~/.cache
+  
+      - name: Clear Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-clear-cache-${{ hashFiles('**/*.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-clear-cache-
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: false
+      - name: Push to hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: git push --force https://abhijitpaul:$HF_TOKEN@huggingface.co/spaces/abhijitpaul/Credit-Card-Default-Detection main
