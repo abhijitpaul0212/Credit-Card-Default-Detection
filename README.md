@@ -60,8 +60,8 @@ The XGBClassifier model emerged as the most effective have below metric scores:
 * F1: 81%
 
 ## Deployed URLs
-* STREAMLIT: https://credit-card-defaults-prediction.streamlit.app/
-* HUGGINGFACE: https://huggingface.co/spaces/abhijitpaul/credit-card-default
+* STREAMLIT: https://credit-card-default-detection.streamlit.app/
+* HUGGINGFACE: https://huggingface.co/spaces/abhijitpaul/Credit-Card-Default-Detection
 * AWS: https://5hniewmhgh.us-east-1.awsapprunner.com/
 
 ## Project Artifacts
