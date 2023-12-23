@@ -49,10 +49,11 @@ def predict_datapoint():
         final_data = data.get_data_as_dataframe()
 
         predict_pipeline = PredictPipeline()
-        pred = predict_pipeline.predict(final_data)
+        pred, prob_not_default, prob_default = predict_pipeline.predict(final_data)
         result = "DEFAULT" if pred[0] == 1 else "NOT DEFAULT"
+        probability = prob_default if pred[0] == 1 else prob_not_default
 
-        return render_template("result.html", final_result=result)
+        return render_template("result.html", final_result=result, probability=probability)
     
 
 if __name__ == "__main__":

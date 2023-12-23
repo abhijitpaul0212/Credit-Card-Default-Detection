@@ -38,7 +38,9 @@ class ModelEvaluation:
             model = Utils().load_object(model_path)
 
             with mlflow.start_run(run_id=mlflow_setup.get_active_run_id(), nested=True):
-
+                
+                mlflow.set_tag("Best Model", str(model).split("(")[0])
+                
                 (accuracy, f1, precision, recall, roc_auc) = self.eval_metrics(model, X_test, y_test)
 
                 logging.info("accuracy_score: {}".format(accuracy))

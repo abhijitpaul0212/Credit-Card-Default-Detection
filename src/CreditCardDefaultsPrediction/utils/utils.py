@@ -159,7 +159,6 @@ class Utils:
 
             with mlflow.start_run(run_id=mlflow_setup.get_active_run_id(), nested=True):               
                 logging.info("\n\n========================= {} =======================".format(model_name))
-                mlflow.set_tag("model_name", model_name)
 
                 random_search_cv = RandomizedSearchCV(estimator=model, param_distributions=params, n_iter=5, scoring=metric, n_jobs=-1, cv=5, verbose=verbose, random_state=5)
 

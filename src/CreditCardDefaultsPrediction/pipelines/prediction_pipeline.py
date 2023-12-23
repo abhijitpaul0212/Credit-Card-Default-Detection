@@ -27,9 +27,15 @@ class PredictPipeline:
             scaled_data = preprocessor.transform(features)
             
             pred = model.predict(scaled_data)
+
+            prob_not_default = round(model.predict_proba(scaled_data)[:, 0][0] * 100)
+            prob_default = round(model.predict_proba(scaled_data)[:, 1][0] * 100)
+
+            print("Probability of Not Default: ", prob_not_default)
+            print("Probability of Default: ", prob_default)
             logging.info('Predicted value: {}'.format(pred))
             
-            return pred
+            return (pred, prob_not_default, prob_default)
 
         except Exception as e:
             raise CustomException(e, sys)
