@@ -109,6 +109,7 @@ db=client["credit_card_defaults"]
 collection= db['data']
 
 # inserting the records into mongo db
+records = df.to_dict(orient='records')
 collection.insert_many(records)
 
 # Retrieve data from the collection
